@@ -7,9 +7,14 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Bash Fundamentals</h2><p class=\"text-secondary\">Bash is both a <strong>command interpreter</strong> and a <strong>scripting language</strong>. You type a command, Bash locates it, runs it, and shows output.</p><h3 class=\"h6\">Running commands</h3><ul><li><code>type ls</code> or <code>which ls</code> shows where a command comes from.</li><li><code>echo $PATH</code> lists directories Bash searches for executables.</li><li>Absolute path: starts with <code>/</code> (e.g., <code>/usr/bin/ls</code>). Relative: from current directory.</li></ul><pre><code># where am I?\npwd\n# what's here?\nls -la\n# run a program by absolute path\n/usr/bin/printf \"OK\\n\"\n</code></pre><h3 class=\"h6\">Getting help</h3><ul><li><code>man ls</code> opens the manual page.</li><li>Many tools support <code>--help</code>.</li><li>Search man page names: <code>apropos archive</code>.</li></ul><h3 class=\"h6\">Exit status</h3><p class=\"text-secondary\">Every command returns an exit code in <code>$?</code>. <code>0</code>=success, non‑zero=error.</p><pre><code>false\necho $?\n</code></pre></section>",
     "game": {
       "tasks": [
-        { "prompt": "Print 'hello'", "expect": ["echo hello"] },
-        { "prompt": "Show current dir", "expect": ["pwd"] },
-        { "prompt": "List files incl. hidden", "expect": ["ls -a", "ls -al", "ls -la"] }
+        { "prompt": "Print the text 'Hello, BashCamp!'.", "expect": ["echo Hello, BashCamp!", "echo \"Hello, BashCamp!\""] },
+        { "prompt": "Show your current working directory.", "expect": ["pwd"] },
+        { "prompt": "List all files including hidden ones.", "expect": ["ls -a", "ls -al", "ls -la"] },
+        { "prompt": "Show where the command 'ls' is located.", "expect": ["type ls", "which ls"] },
+        { "prompt": "Print your PATH variable.", "expect": ["echo $PATH"] },
+        { "prompt": "Open the manual page for ls.", "expect": ["man ls"] },
+        { "prompt": "Show help text for ls using a flag.", "expect": ["ls --help"] },
+        { "prompt": "Run 'false' and then print its exit code.", "expect": ["false; echo $?", "false && echo $?", "false || echo $?"] }
       ]
     },
     "quiz": [
@@ -28,9 +33,12 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Shell</h2><p class=\"text-secondary\">A <strong>shell</strong> reads commands from your keyboard or a script file and executes them. Bash is one popular shell; others include <code>zsh</code> and <code>fish</code>.</p><h3 class=\"h6\">Interactive vs non‑interactive</h3><ul><li>Interactive: prompt is visible; <code>$-</code> contains <code>i</code>.</li><li>Non‑interactive: running a script or piped input; no prompt.</li></ul><pre><code>echo $-\n# contains 'i' when interactive\n</code></pre><h3 class=\"h6\">Login vs non‑login</h3><ul><li>Login shells read files like <code>/etc/profile</code>, <code>~/.bash_profile</code> or <code>~/.profile</code>.</li><li>Non‑login interactive shells usually read <code>~/.bashrc</code>.</li></ul><pre><code>echo \"$0\"   # shell name\nps -p $$     # see parent process for context\n</code></pre><p class=\"text-secondary mb-0\">Put aliases and prompt tweaks in <code>~/.bashrc</code>; keep exported env in login files.</p></section>",
     "game": {
       "tasks": [
-        { "prompt": "Print 'hello'", "expect": ["echo hello"] },
-        { "prompt": "Show current dir", "expect": ["pwd"] },
-        { "prompt": "List files incl. hidden", "expect": ["ls -a", "ls -al", "ls -la"] }
+        { "prompt": "Print the current shell as invoked (hint: use a variable).", "expect": ["echo $0"] },
+        { "prompt": "Show current process information for this shell (PID $$).", "expect": ["ps -p $$"] },
+        { "prompt": "Print the special flags variable to check if interactive.", "expect": ["echo $-"] },
+        { "prompt": "Echo the HOME variable.", "expect": ["echo $HOME"] },
+        { "prompt": "Create an alias 'll' for 'ls -la' for this session.", "expect": ["alias ll='ls -la'"] },
+        { "prompt": "List defined aliases.", "expect": ["alias"] }
       ]
     },
     "quiz": [
@@ -47,9 +55,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Bash shell</h2><p class=\"text-secondary\">Bash stands for <em>Bourne Again SHell</em>. It extends <code>sh</code> with history, job control, arrays, completion, and more.</p><h3 class=\"h6\">Core features</h3><ul><li><strong>History</strong>: arrow keys, <code>history</code>, <code>!n</code>.</li><li><strong>Completion</strong>: hit <kbd>Tab</kbd> to complete files/commands.</li><li><strong>Globbing</strong>: <code>*</code>, <code>?</code>, <code>[a-z]</code> for filename patterns.</li><li><strong>Builtins</strong> vs external programs: <code>help cd</code>, <code>type echo</code>.</li></ul><pre><code>bash --version\nshopt | grep glob\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Print 'hello'", "expect": ["echo hello"] },
-        { "prompt": "Show current dir", "expect": ["pwd"] },
-        { "prompt": "List files incl. hidden", "expect": ["ls -a", "ls -al", "ls -la"] }
+        { "prompt": "Print the Bash version.", "expect": ["bash --version"] },
+        { "prompt": "List your command history.", "expect": ["history"] },
+        { "prompt": "Show whether globbing options are enabled (hint: shopt).", "expect": ["shopt"] },
+        { "prompt": "Check if 'echo' is a builtin or external.", "expect": ["type echo"] },
+        { "prompt": "Use brace expansion to echo file names f1, f2, f3.", "expect": ["echo f{1..3}"] }
       ]
     },
     "quiz": [
@@ -66,9 +76,10 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">CLI and GUI</h2><p class=\"text-secondary\">The <strong>CLI</strong> excels at scripting, automation, reproducibility, and remote servers. <strong>GUIs</strong> shine for visual tasks and exploration.</p><div class=\"row g-3\"><div class=\"col-md-6\"><div class=\"card bg-dark border-secondary h-100\"><div class=\"card-body\"><h3 class=\"h6\">CLI strengths</h3><ul><li>Fast repetitive tasks</li><li>Automatable and scriptable</li><li>Works over SSH</li><li>Composable via pipes</li></ul></div></div></div><div class=\"col-md-6\"><div class=\"card bg-dark border-secondary h-100\"><div class=\"card-body\"><h3 class=\"h6\">GUI strengths</h3><ul><li>Visual feedback</li><li>Discoverability</li><li>Lower barrier for new users</li></ul></div></div></div></div><pre><code># count 404s in server logs\ncat access.log | grep 404 | wc -l\n</code></pre><p class=\"text-secondary mb-0\">Choose the tool that minimizes time and mistakes.</p></section>",
     "game": {
       "tasks": [
-        { "prompt": "Print 'hello'", "expect": ["echo hello"] },
-        { "prompt": "Show current dir", "expect": ["pwd"] },
-        { "prompt": "List files incl. hidden", "expect": ["ls -a", "ls -al", "ls -la"] }
+        { "prompt": "Pipe the output of 'echo one two three' to 'wc -w' to count words.", "expect": ["echo one two three | wc -w"] },
+        { "prompt": "Send the output of 'date' to a file named run.log (overwrite).", "expect": ["date > run.log"] },
+        { "prompt": "Append the output of 'date' to run.log.", "expect": ["date >> run.log"] },
+        { "prompt": "Show only lines containing 'error' from app.log.", "expect": ["grep error app.log", "cat app.log | grep error"] }
       ]
     },
     "quiz": [
@@ -85,9 +96,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Job Automation</h2><p class=\"text-secondary\">Automate recurring tasks with <code>cron</code> and one‑off jobs with <code>at</code>. Cron uses a five‑field schedule expression.</p><h3 class=\"h6\">Crontab format</h3><pre><code># m h dom mon dow  command\n0 1 * * * /usr/local/bin/backup.sh >> \"$HOME/logs/backup.log\" 2>&1\n</code></pre><ul><li>Edit with <code>crontab -e</code>; list with <code>crontab -l</code>.</li><li>Always use absolute paths and capture output.</li><li>Set required env (e.g., <code>PATH</code>) at the top of the crontab.</li></ul><h3 class=\"h6\">One‑off with at</h3><pre><code>echo \"echo run once\" | at now + 2 minutes\natq   # queue\natrm 1\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Open crontab editor", "expect": ["crontab -e"] },
-        { "prompt": "List user crontab", "expect": ["crontab -l"] },
-        { "prompt": "Cron: run /usr/local/bin/backup.sh daily at 01:00", "expect": ["0 1 * * * /usr/local/bin/backup.sh"] }
+        { "prompt": "Open your user crontab in the editor.", "expect": ["crontab -e"] },
+        { "prompt": "List your user crontab.", "expect": ["crontab -l"] },
+        { "prompt": "Schedule /usr/local/bin/backup.sh to run every day at 01:00.", "expect": ["0 1 * * * /usr/local/bin/backup.sh"] },
+        { "prompt": "Queue a one‑off job that runs 'echo once' two minutes from now.", "expect": ["echo echo once | at now + 2 minutes", "echo \"echo once\" | at now + 2 minutes"] },
+        { "prompt": "Show the at job queue.", "expect": ["atq"] }
       ]
     },
     "quiz": [
@@ -104,9 +117,12 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Navigating the Linux file system</h2><p class=\"text-secondary\">The shell tracks a current directory. Use these to move quickly and see where you are.</p><pre><code>pwd                # print current directory\nls -la             # list files incl. hidden\ncd /etc            # absolute path\ncd -               # jump back\ncd ~/projects      # home subdir\n</code></pre><h3 class=\"h6\">Absolute vs relative</h3><ul><li>Absolute begins with <code>/</code> from the root.</li><li>Relative is resolved from the current directory.</li></ul><h3 class=\"h6\">Globbing</h3><pre><code>ls *.log\nls src/*.{c,h}\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Show current directory", "expect": ["pwd"] },
-        { "prompt": "List all files including hidden", "expect": ["ls -a", "ls -al", "ls -la"] },
-        { "prompt": "Move to parent directory", "expect": ["cd .."] }
+        { "prompt": "Print your current directory path.", "expect": ["pwd"] },
+        { "prompt": "List all files including hidden.", "expect": ["ls -a", "ls -al", "ls -la"] },
+        { "prompt": "Change to the parent directory.", "expect": ["cd .."] },
+        { "prompt": "Change to your home directory using ~.", "expect": ["cd ~"] },
+        { "prompt": "List all .log files in the current directory using a glob.", "expect": ["ls *.log"] },
+        { "prompt": "Return to the previous directory.", "expect": ["cd -"] }
       ]
     },
     "quiz": [
@@ -123,9 +139,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Basic bash scripting</h2><p class=\"text-secondary\">A Bash script is a text file of commands executed top‑to‑bottom.</p><h3 class=\"h6\">Hello script</h3><pre><code>nano hello.sh\n</code></pre><pre><code>#!/usr/bin/env bash\nset -euo pipefail\nprintf \"Hello from a script!\\n\"\n</code></pre><pre><code>chmod +x hello.sh\n./hello.sh\n</code></pre><ul><li><code>set -euo pipefail</code> is a safe default for small scripts.</li><li>Use <code>chmod</code> to make it executable.</li></ul><h3 class=\"h6\">Permissions</h3><pre><code>ls -l hello.sh\nchmod u+x hello.sh\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Create hello.sh", "expect": ["touch hello.sh"] },
-        { "prompt": "Make it executable", "expect": ["chmod +x hello.sh"] },
-        { "prompt": "Run it from here", "expect": ["./hello.sh"] }
+        { "prompt": "Create an empty file named hello.sh.", "expect": ["touch hello.sh"] },
+        { "prompt": "Make hello.sh executable.", "expect": ["chmod +x hello.sh"] },
+        { "prompt": "Run hello.sh from the current directory.", "expect": ["./hello.sh"] },
+        { "prompt": "Print the long listing for hello.sh.", "expect": ["ls -l hello.sh"] },
+        { "prompt": "Append a shebang line to hello.sh using echo.", "expect": ["echo '#!/usr/bin/env bash' >> hello.sh"] }
       ]
     },
     "quiz": [
@@ -142,9 +160,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Shell script</h2><p class=\"text-secondary\">Scripts accept <strong>arguments</strong> and return an <strong>exit code</strong>. Structure them with functions.</p><pre><code>#!/usr/bin/env bash\nset -euo pipefail\nusage(){ echo \"Usage: $0 NAME\"; }\nmain(){ local name=${1:-}; [[ -z ${name} ]] && { usage; return 2; }\n  echo \"Hello, ${name}\" }\nmain \"$@\"\n</code></pre><ul><li><code>$0</code> is the script name; <code>$1</code>, <code>$2</code>… are arguments.</li><li><code>$@</code> expands to all args safely.</li><li>Return with <code>exit</code> or a function <code>return</code> code.</li></ul><pre><code>./greeter.sh Sam\necho $?\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Create hello.sh", "expect": ["touch hello.sh"] },
-        { "prompt": "Make it executable", "expect": ["chmod +x hello.sh"] },
-        { "prompt": "Run it from here", "expect": ["./hello.sh"] }
+        { "prompt": "Create a file named greeter.sh.", "expect": ["touch greeter.sh"] },
+        { "prompt": "Make greeter.sh executable.", "expect": ["chmod +x greeter.sh"] },
+        { "prompt": "Run greeter.sh from the current directory.", "expect": ["./greeter.sh"] },
+        { "prompt": "Print this script’s name using a parameter (simulate): enter the expansion.", "expect": ["echo $0"] },
+        { "prompt": "Print all arguments safely.", "expect": ["echo \"$@\""] }
       ]
     },
     "quiz": [
@@ -161,9 +181,12 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Declaring and using variables</h2><p class=\"text-secondary\">Variables are <code>name=value</code> with no spaces. Use quotes to handle spaces and special characters.</p><pre><code>NAME=\"Bash\"\necho \"Hello, $NAME\"\nexport PATH_EXTRA=/opt/bin\nPATH=\"$PATH:$PATH_EXTRA\"\n</code></pre><h3 class=\"h6\">Quoting</h3><ul><li>Double quotes expand vars: <code>\"$HOME\"</code>.</li><li>Single quotes are literal: <code>'$HOME'</code>.</li></ul><h3 class=\"h6\">Parameter expansion</h3><pre><code>echo \"User: ${USER:-unknown}\"\nfile=${1:?\"missing filename\"}\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Create variable NAME=Sam", "expect": ["NAME=Sam"] },
-        { "prompt": "Print variable NAME", "expect": ["echo $NAME"] },
-        { "prompt": "Export PATH_EXTRA=/opt/bin", "expect": ["export PATH_EXTRA=/opt/bin"] }
+        { "prompt": "Create a variable NAME with value Sam.", "expect": ["NAME=Sam"] },
+        { "prompt": "Print the variable NAME.", "expect": ["echo $NAME"] },
+        { "prompt": "Export PATH_EXTRA with value /opt/bin.", "expect": ["export PATH_EXTRA=/opt/bin"] },
+        { "prompt": "Append PATH_EXTRA to PATH (simple form).", "expect": ["PATH=$PATH:$PATH_EXTRA"] },
+        { "prompt": "Print HOME using double quotes.", "expect": ["echo \"$HOME\""] },
+        { "prompt": "Print the literal text $HOME using single quotes.", "expect": ["echo '$HOME'"] }
       ]
     },
     "quiz": [
@@ -180,9 +203,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Basic logic</h2><p class=\"text-secondary\">Control flow lets scripts make decisions and iterate.</p><h3 class=\"h6\">Tests</h3><pre><code>[ -f file.txt ] && echo yes\n[[ $x == \"foo\" ]] || echo not-foo\n</code></pre><h3 class=\"h6\">If / elif / else</h3><pre><code>if [[ -d logs ]]; then\n  echo \"dir exists\"\nelif [[ -e logs ]]; then\n  echo \"path exists\"\nelse\n  echo \"missing\"\nfi\n</code></pre><h3 class=\"h6\">Loops</h3><pre><code>for i in 1 2 3; do echo \"$i\"; done\nwhile read -r line; do echo \"$line\"; done &lt; file.txt\n</code></pre><h3 class=\"h6\">Case</h3><pre><code>case \"$1\" in\n  start) echo start;;\n  stop)  echo stop;;\n  *)     echo usage;;\nesac\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Check if file.txt exists (print yes)", "expect": ["[ -f file.txt ] && echo yes", "test -f file.txt && echo yes"] },
-        { "prompt": "For loop over 1..3 printing each", "expect": ["for i in 1 2 3; do echo $i; done"] },
-        { "prompt": "Use case statement (default branch)", "expect": ["case $x in *) echo default;; esac"] }
+        { "prompt": "Test if file.txt exists and print yes if it does.", "expect": ["[ -f file.txt ] && echo yes", "test -f file.txt && echo yes"] },
+        { "prompt": "If logs is a directory, print 'dir exists' using [[ ]].", "expect": ["if [[ -d logs ]]; then echo 'dir exists'; fi", "if [[ -d logs ]]; then echo dir exists; fi"] },
+        { "prompt": "For loop: print numbers 1 2 3 on separate lines.", "expect": ["for i in 1 2 3; do echo $i; done"] },
+        { "prompt": "While loop: read lines from file.txt and echo each (safe read).", "expect": ["while read -r line; do echo \"$line\"; done < file.txt"] },
+        { "prompt": "Case statement: default branch prints 'usage'.", "expect": ["case \"$1\" in *) echo usage;; esac", "case $1 in *) echo usage;; esac"] }
       ]
     },
     "quiz": [
@@ -199,9 +224,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Writing scripts executable</h2><p class=\"text-secondary\">To run a script directly, it needs the execute bit and a correct shebang.</p><pre><code>echo '#!/usr/bin/env bash' > script.sh\necho 'echo run' >> script.sh\nchmod +x script.sh\n./script.sh\n</code></pre><ul><li><code>./script.sh</code> uses the shebang.</li><li><code>sh script.sh</code> forces <code>sh</code> semantics, which may differ.</li></ul><h3 class=\"h6\">Adding to PATH</h3><pre><code>mkdir -p \"$HOME/bin\"\nmv script.sh \"$HOME/bin/\"\nexport PATH=\"$HOME/bin:$PATH\"\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Make script.sh executable", "expect": ["chmod +x script.sh"] },
-        { "prompt": "Run script.sh from current dir", "expect": ["./script.sh"] },
-        { "prompt": "Add current dir to PATH temporarily", "expect": ["export PATH=$PATH:."] }
+        { "prompt": "Write a one‑line script to script.sh that prints 'run'.", "expect": ["echo 'echo run' > script.sh", "printf 'echo run\n' > script.sh"] },
+        { "prompt": "Prepend the shebang '#!/usr/bin/env bash' to script.sh.", "expect": ["sed -i '1i #!/usr/bin/env bash' script.sh", "printf '#!/usr/bin/env bash\n' | cat - script.sh > tmp && mv tmp script.sh"] },
+        { "prompt": "Make script.sh executable.", "expect": ["chmod +x script.sh"] },
+        { "prompt": "Run script.sh using the shebang.", "expect": ["./script.sh"] },
+        { "prompt": "Temporarily add current directory to PATH.", "expect": ["export PATH=$PATH:."] }
       ]
     },
     "quiz": [
@@ -218,9 +245,12 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">Automating File or Log Creation</h2><p class=\"text-secondary\">Many scripts generate logs or data files. Use timestamps and redirection to manage them cleanly.</p><h3 class=\"h6\">Create and append</h3><pre><code>touch app.log\nprintf \"%s\\n\" \"started\" >> app.log\n</code></pre><h3 class=\"h6\">Timestamped filenames</h3><pre><code>stamp=$(date +%Y-%m-%d_%H-%M-%S)\nlog=\"logs/run_${stamp}.log\"\nmkdir -p logs\nmyjob > \"$log\" 2>&1\n</code></pre><h3 class=\"h6\">Simple rotation</h3><pre><code>gzip -9 app.log\nmv app.log app.log.1.gz\n: > app.log\n</code></pre>",
     "game": {
       "tasks": [
-        { "prompt": "Open crontab editor", "expect": ["crontab -e"] },
-        { "prompt": "List user crontab", "expect": ["crontab -l"] },
-        { "prompt": "Cron: run /usr/local/bin/backup.sh daily at 01:00", "expect": ["0 1 * * * /usr/local/bin/backup.sh"] }
+        { "prompt": "Create an empty file named app.log.", "expect": ["touch app.log"] },
+        { "prompt": "Append the word 'started' to app.log using printf.", "expect": ["printf \"%s\\n\" \"started\" >> app.log", "echo started >> app.log"] },
+        { "prompt": "Create a logs directory if it does not exist.", "expect": ["mkdir -p logs"] },
+        { "prompt": "Append the current date to logs/run.log.", "expect": ["date >> logs/run.log"] },
+        { "prompt": "Compress app.log with gzip using high compression.", "expect": ["gzip -9 app.log"] },
+        { "prompt": "Truncate app.log to zero bytes using : redirection.", "expect": [": > app.log"] }
       ]
     },
     "quiz": [
@@ -237,9 +267,11 @@ window.LESSONS = [
     "html": "<section class=\"panel p-4 p-md-5 mb-4\"><h2 class=\"h3 mb-2\">What is Bash?</h2><p class=\"text-secondary\">Bash (Bourne Again SHell) is a widely used shell for Unix‑like systems. It is both a command interpreter and a scripting language.</p><h3 class=\"h6\">Why Bash?</h3><ul><li>Default on many Linux distributions and available on macOS and Windows (via WSL, Git Bash).</li><li>Powerful for system administration and automation.</li><li>Compatible with POSIX <code>sh</code>, with many useful extensions.</li></ul><h3 class=\"h6\">Core concepts</h3><p class=\"text-secondary\">Navigate the filesystem, manipulate text, control processes, and automate with scripts. Combine tools via pipes and redirection.</p><pre><code># Print working directory\npwd\n\n# List files including hidden\nls -a\n\n# Echo a message\necho \"Hello, Bash!\"\n</code></pre></section>",
     "game": {
       "tasks": [
-        { "prompt": "Print 'Hello Bash!'", "expect": ["echo Hello Bash!", "echo \"Hello Bash!\""] },
-        { "prompt": "Show your current directory", "expect": ["pwd"] },
-        { "prompt": "List all files including hidden", "expect": ["ls -a", "ls -al", "ls -la"] }
+        { "prompt": "Print 'Hello Bash!'.", "expect": ["echo Hello Bash!", "echo \"Hello Bash!\""] },
+        { "prompt": "Show your current directory.", "expect": ["pwd"] },
+        { "prompt": "List all files including hidden.", "expect": ["ls -a", "ls -al", "ls -la"] },
+        { "prompt": "Echo the current shell variable.", "expect": ["echo $SHELL"] },
+        { "prompt": "Print your user name using whoami.", "expect": ["whoami"] }
       ]
     },
     "quiz": [
