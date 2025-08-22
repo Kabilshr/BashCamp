@@ -1,42 +1,67 @@
-// Game engine: loads tasks for lesson id from lesson.json
-window.initGame = async function(){
+// Game engine with regex + simulated output
+window.initGame = async function () {
   const id = new URLSearchParams(location.search).get('id') || '1';
   let tasks = [];
   try {
     let lessons = (window.LESSONS || null);
-    if(!lessons){ const res = await fetch('data/lesson.json'); lessons = await res.json(); }
+    if (!lessons) {
+      const res = await fetch('data/lesson.json');
+      lessons = await res.json();
+    }
     const lesson = lessons.find(x => String(x.id) === String(id));
-    if(lesson && lesson.game && lesson.game.tasks){
+    if (lesson && lesson.game && lesson.game.tasks) {
       tasks = lesson.game.tasks;
     }
-    if(lesson){
-      document.getElementById('game-title').textContent = lesson.title + " — Mini‑Game";
+    if (lesson) {
+      document.getElementById('game-title').textContent = lesson.title + " — Mini-Game";
       document.getElementById('game-sub').textContent = lesson.blurb || "";
     }
-  } catch(e){ console.error(e); }
+  } catch (e) { console.error(e); }
 
   const taskEl = document.getElementById('task');
   const cmdEl = document.getElementById('cmd');
   const outEl = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
   let i = 0;
-  function showTask(){
-    if(tasks[i]){
-      taskEl.textContent = "Task " + (i+1) + " of " + tasks.length + ": " + tasks[i].prompt;
+
+  // Simulated filesystem state
+  const state = { cwd: "/home/user", files: ["file.txt", "hello.sh"] };
+
+  function showTask() {
+    if (tasks[i]) {
+      taskEl.textContent = "Task " + (i + 1) + " of " + tasks.length + ": " + tasks[i].prompt;
     } else {
       taskEl.textContent = "No tasks found.";
     }
   }
-  function run(){
-    if(!tasks[i]) return;
+
+  function simulate(cmd) {
+    if (/^pwd$/.test(cmd)) return state.cwd;
+    if (/^ls(\s+-[al]*)?$/.test(cmd)) return state.files.join("\n");
+    if (/^echo\s+(.+)/.test(cmd)) return cmd.replace(/^echo\s+/, "");
+    if (/^cd\s+\.\.$/.test(cmd)) { state.cwd = "/home"; return ""; }
+    return "(no output)";
+  }
+
+  function run() {
+    if (!tasks[i]) return;
     const v = cmdEl.value.trim();
-    if(tasks[i].expect.includes(v)){
-      outEl.textContent += "✅ Correct: " + v + "\n";
+    let ok = false;
+
+    // Check against regex patterns
+    for (const exp of tasks[i].expect) {
+      const regex = new RegExp("^" + exp.replace(/\s+/g, "\\s+") + "$", "i");
+      if (regex.test(v)) { ok = true; break; }
+    }
+
+    if (ok) {
+      const result = simulate(v);
+      outEl.textContent += "✅ " + v + "\n" + (result ? result + "\n" : "");
       i++;
-      if(i < tasks.length){
+      if (i < tasks.length) {
         showTask();
       } else {
-        outEl.textContent += "\n🎉 All tasks complete! Try the quiz next.";
+        outEl.textContent += "\n🎉 All tasks complete! Try the quiz next.\n";
         taskEl.textContent = "All tasks done!";
       }
     } else {
@@ -44,9 +69,10 @@ window.initGame = async function(){
     }
     cmdEl.value = "";
   }
+
   runBtn.addEventListener('click', run);
-  cmdEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter'){ run(); }});
+  cmdEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { run(); } });
   showTask();
-}
-// auto-init
-window.addEventListener('DOMContentLoaded', ()=>{ window.initGame(); });
+};
+
+window.addEventListener('DOMContentLoaded', () => { window.initGame(); });
