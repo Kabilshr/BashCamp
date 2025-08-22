@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,15 +10,21 @@
   <!-- Monospace fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <!-- Site styles -->
   <link href="assets/styles.css" rel="stylesheet">
 </head>
+
 <body class="bg-dark text-light">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">🡆 BashCamp</a>
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <img src="assets/logo-dark.png" alt="BashCamp" height="28">
+      <span class="fw-bold">BashCamp</span>
+    </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -42,13 +49,14 @@
 
     <!-- NEW full‑width banner: What is Bash (same design as hero) -->
     <section class="hero panel p-4 p-md-5 mb-4">
-  <h2 class="display-6 fw-bold mb-2">What is Bash</h2>
-  <p class="text-secondary">A quick primer on the Bash shell: what it is, why it’s everywhere, and how it powers your command line.</p>
-  <div class="d-flex gap-2">
-    <a class="btn btn-info btn-lg" href="lesson-bash.html">Open Lesson</a>
-    <a class="btn btn-outline-light btn-lg" href="quiz.html?id=13">Take Quiz</a>
-  </div>
-</section>
+      <h2 class="display-6 fw-bold mb-2">What is Bash</h2>
+      <p class="text-secondary">A quick primer on the Bash shell: what it is, why it's everywhere, and how it powers
+        your command line.</p>
+      <div class="d-flex gap-2">
+        <a class="btn btn-info btn-lg" href="lesson-bash.html">Open Lesson</a>
+        <a class="btn btn-outline-light btn-lg" href="quiz.html?id=13">Take Quiz</a>
+      </div>
+    </section>
 
 
     <!-- Grid (unchanged) -->
@@ -258,4 +266,5 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
