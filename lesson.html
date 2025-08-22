@@ -1,102 +1,99 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lesson — BashCamp</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Monospace fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
+
 <body class="bg-dark text-light">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html"><img src="/assets/logo-dark.png" alt="logo" style="width: 40px;""> BashCamp</a>    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="learn.html">Lessons</a></li>
-        <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">🡆 BashCamp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="learn.html">Lessons</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<main class="container py-5">
-  <header></header>
+  <main class="container py-5">
+    <section class="container" id="lesson-container" style="max-width: 900px;">
+      <header class="mb-4">
+        <h1 class="h2" id="lesson-title">Lesson</h1>
+        <p class="text-secondary" id="lesson-blurb"></p>
+      </header>
 
-  <section class="container">
-    <div class="lesson-head">
-      <h1 id="lesson-title">Lesson Title</h1>
-      <p class="small" id="lesson-desc">Lesson description...</p>
-    </div>
+      <article id="lesson-content" class="panel p-3"></article>
 
-    <div class="lesson-content" id="lesson-body"></div>
-
-    <div class="quiz" id="quiz-block" style="display:none">
-      <h3>Quiz</h3>
-      <div id="quiz-questions"></div>
-    </div>
-  
-    <section>
-      <div id="lesson-container" class="mx-auto" style="max-width: 900px;">
-        <header class="mb-4">
-          <h1 class="h2" id="lesson-title">Lesson</h1>
-          <p class="text-secondary" id="lesson-blurb"></p>
-        </header>
-
-        <article id="lesson-content" class="panel p-3"></article>
-
-        <div class="mt-3 d-flex gap-2">
-          <!-- Fallback href ensures navigation even if JS fails -->
-          <a id="game-btn" href="games.html" class="btn btn-outline-light">Play Game</a>
-          <a id="quiz-btn" href="quiz.html" class="btn btn-info">Take Quiz</a>
-        </div>
+      <div class="mt-3 d-flex gap-2">
+        <a id="game-btn" href="games.html" class="btn btn-outline-light">Play Game</a>
+        <a id="quiz-btn" href="quiz.html" class="btn btn-info">Take Quiz</a>
       </div>
     </section>
-  </section>
-</main>
+  </main>
 
-<footer class="mt-5 py-5 bg-black border-top border-secondary">
-  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary">
-    <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
-      <img src="assets/logo-light.png" alt="" height="20">
-      <strong class="text-light">BashCamp</strong>
-      <span class="ms-2">Learn Bash from basics to extreme — with play.</span>
+  <footer class="mt-5 py-5 bg-black border-top border-secondary">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary">
+      <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+        <img src="assets/logo-light.png" alt="" height="20">
+        <strong class="text-light">BashCamp</strong>
+        <span class="ms-2">Learn Bash from basics to extreme — with play.</span>
+      </div>
+      <div class="text-md-end">
+        <a href="about.html" class="link-secondary me-3">Team</a>
+        <a href="resources.html" class="link-secondary me-3">Resources</a>
+        <span id="year">© 2025</span>
+      </div>
     </div>
-    <div class="text-md-end">
-      <a href="about.html" class="link-secondary me-3">Team</a>
-      <a href="resources.html" class="link-secondary me-3">Resources</a>
-      <span>© 2025 BashCamp</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="data/lesson.js"></script>
-<script src="js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Load lessons and app core -->
+  <script src="data/lesson.js"></script>
+  <script src="js/app.js"></script>
 
-<!-- Make buttons carry the current lesson's id -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-  const lessonId = params.get("id") || 1; // default to 1 if missing
+  <!-- Strict renderer: pulls from window.LESSONS, falls back to data/lesson.json -->
+  <script>
+    (function () {
+      const id = new URLSearchParams(location.search).get('id') || '1';
 
-  const gameBtn = document.getElementById("game-btn");
-  const quizBtn = document.getElementById("quiz-btn");
+      async function getLessons() {
+        if (window.LESSONS && Array.isArray(window.LESSONS)) return window.LESSONS;
+        const res = await fetch('data/lesson.json', {cache: 'no-store'});
+        return res.json();
+      }
 
-  gameBtn.href = `games.html?id=${encodeURIComponent(lessonId)}`;
-  quizBtn.href = `quiz.html?id=${encodeURIComponent(lessonId)}`;
-});
-</script>
+      function fill(lesson) {
+        document.getElementById('lesson-title').textContent = lesson.title || 'Lesson';
+        document.getElementById('lesson-blurb').textContent = lesson.blurb || '';
+        document.getElementById('lesson-content').innerHTML = lesson.html || '';
 
+        const gameBtn = document.getElementById('game-btn');
+        const quizBtn = document.getElementById('quiz-btn');
+        if (gameBtn) gameBtn.href = `games.html?id=${encodeURIComponent(id)}`;
+        if (quizBtn) quizBtn.href = `quiz.html?id=${encodeURIComponent(id)}`;
+      }
+
+      getLessons().then(list => {
+        const lesson = list.find(x => String(x.id) === String(id)) || list[0];
+        fill(lesson);
+      }).catch(err => console.error('Lesson load error:', err));
+    })();
+  </script>
 </body>
+
 </html>
