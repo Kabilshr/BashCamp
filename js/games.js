@@ -1,78 +1,120 @@
-// Game engine with regex + simulated output
+// js/games.js
+
+// Game engine with regex + simulated output.
+// Do NOT auto-init here. games.html calls window.initGame() once.
 window.initGame = async function () {
   const id = new URLSearchParams(location.search).get('id') || '1';
   let tasks = [];
   try {
     let lessons = (window.LESSONS || null);
     if (!lessons) {
-      const res = await fetch('data/lesson.json');
+      const res = await fetch('data/lesson.json', { cache: 'no-store' });
       lessons = await res.json();
     }
     const lesson = lessons.find(x => String(x.id) === String(id));
-    if (lesson && lesson.game && lesson.game.tasks) {
-      tasks = lesson.game.tasks;
-    }
+    if (lesson?.game?.tasks) tasks = lesson.game.tasks;
     if (lesson) {
-      document.getElementById('game-title').textContent = lesson.title + " — Mini-Game";
-      document.getElementById('game-sub').textContent = lesson.blurb || "";
+      const t = document.getElementById('game-title');
+      const s = document.getElementById('game-sub');
+      if (t) t.textContent = `${lesson.title} — Mini‑Game`;
+      if (s) s.textContent = lesson.blurb || '';
     }
-  } catch (e) { console.error(e); }
+  } catch (e) {
+    console.error(e);
+  }
 
   const taskEl = document.getElementById('task');
-  const cmdEl = document.getElementById('cmd');
-  const outEl = document.getElementById('output');
+  const cmdEl  = document.getElementById('cmd');
+  const outEl  = document.getElementById('output');
   const runBtn = document.getElementById('runBtn');
+  if (!taskEl || !cmdEl || !outEl || !runBtn) return;
+
   let i = 0;
 
-  // Simulated filesystem state
-  const state = { cwd: "/home/user", files: ["file.txt", "hello.sh"] };
+  // Simulated environment
+  const state = { cwd: '/home/user', files: ['file.txt', 'hello.sh'] };
+
+  function promptLine(cmd) {
+    return `user@bashcamp:${state.cwd}$ ${cmd}`;
+  }
 
   function showTask() {
-    if (tasks[i]) {
-      taskEl.textContent = "Task " + (i + 1) + " of " + tasks.length + ": " + tasks[i].prompt;
-    } else {
-      taskEl.textContent = "No tasks found.";
-    }
+    taskEl.textContent = tasks[i]
+      ? `Task ${i + 1} of ${tasks.length}: ${tasks[i].prompt}`
+      : 'No tasks found.';
   }
 
+  // Simulate minimal command set
   function simulate(cmd) {
-    if (/^pwd$/.test(cmd)) return state.cwd;
-    if (/^ls(\s+-[al]*)?$/.test(cmd)) return state.files.join("\n");
-    if (/^echo\s+(.+)/.test(cmd)) return cmd.replace(/^echo\s+/, "");
-    if (/^cd\s+\.\.$/.test(cmd)) { state.cwd = "/home"; return ""; }
-    return "(no output)";
+    if (/^pwd$/i.test(cmd)) return state.cwd;
+    if (/^ls(\s+-[al]+)?$/i.test(cmd)) return state.files.join('\n');
+    if (/^echo\s+(.+)/i.test(cmd)) return cmd.replace(/^echo\s+/i, '');
+    if (/^cd\s+\.\.$/i.test(cmd)) { state.cwd = '/home'; return ''; }
+    return '';
   }
 
-  function run() {
-    if (!tasks[i]) return;
-    const v = cmdEl.value.trim();
-    let ok = false;
+  function normalize(s) { return s.trim().replace(/\s+/g, ' '); }
 
-    // Check against regex patterns
-    for (const exp of tasks[i].expect) {
-      const regex = new RegExp("^" + exp.replace(/\s+/g, "\\s+") + "$", "i");
-      if (regex.test(v)) { ok = true; break; }
+  function toRegex(expectStr) {
+    const escaped = expectStr
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      .replace(/\s+/g, '\\s+');
+    return new RegExp(`^${escaped}$`, 'i');
+  }
+
+  let running = false;
+
+  function runOnce() {
+    if (running) return;
+    running = true;
+    setTimeout(() => (running = false), 0);
+
+    if (!tasks[i]) return;
+
+    const raw = cmdEl.value;
+    const v = normalize(raw);
+    if (!v) return;
+
+    // 1) Write prompt + command
+    outEl.textContent += `${promptLine(v)}\n`;
+
+    // 2) Show simulated output
+    const result = simulate(v);
+    if (result) outEl.textContent += result + '\n';
+
+    // 3) Validate AFTER output
+    const expects = tasks[i].expect || [];
+    let ok = false;
+    for (const exp of expects) {
+      if (toRegex(exp).test(v)) { ok = true; break; }
     }
 
     if (ok) {
-      const result = simulate(v);
-      outEl.textContent += "✅ " + v + "\n" + (result ? result + "\n" : "");
+      outEl.textContent += `✅ Correct\n\n`;
       i++;
       if (i < tasks.length) {
         showTask();
       } else {
-        outEl.textContent += "\n🎉 All tasks complete! Try the quiz next.\n";
-        taskEl.textContent = "All tasks done!";
+        outEl.textContent += `🎉 All tasks complete! Try the quiz next.\n`;
+        taskEl.textContent = 'All tasks done!';
       }
     } else {
-      outEl.textContent += "❌ Not quite. Hint: try " + tasks[i].expect[0].split(" ")[0] + "\n";
+      const hint = (expects[0] || '').split(/\s+/)[0] || 'the right command';
+      outEl.textContent += `❌ Not quite. Hint: try ${hint}\n\n`;
     }
-    cmdEl.value = "";
+
+    cmdEl.value = '';
+    outEl.scrollTop = outEl.scrollHeight;
   }
 
-  runBtn.addEventListener('click', run);
-  cmdEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { run(); } });
+  runBtn.addEventListener('click', runOnce);
+  cmdEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      runOnce();
+    }
+  });
+
   showTask();
 };
-
-window.addEventListener('DOMContentLoaded', () => { window.initGame(); });
