@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BashCamp — Learn</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Monospace fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Site styles -->
+  <link href="assets/styles.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html"><img src="/assets/logo-dark.png" alt="logo" style="width: 40px;""> BashCamp</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <!-- Hero (unchanged) -->
+    <section class="hero panel p-4 p-md-5 mb-4">
+      <h1 class="display-6 fw-bold mb-2">Learn</h1>
+      <p class="text-secondary">Pick a lesson and dive in. Each includes a quiz and a mini‑game.</p>
+      <a class="btn btn-info btn-lg" href="lesson.html?id=1">Jump to first lesson</a>
+    </section>
+
+    <!-- NEW full‑width banner: What is Bash (same design as hero) -->
+    <section class="hero panel p-4 p-md-5 mb-4">
+      <h2 class="display-6 fw-bold mb-2">What is Bash</h2>
+      <p class="text-secondary">A quick primer on the Bash shell: what it is, why it's everywhere, and how it powers
+        your command line.</p>
+      <div class="d-flex gap-2">
+        <a class="btn btn-info btn-lg" href="lesson-bash.html">Open Lesson</a>
+        <a class="btn btn-outline-light btn-lg" href="quiz.html?id=13">Take Quiz</a>
+      </div>
+    </section>
+
+
+    <!-- Grid (unchanged) -->
+    <section id="lessons">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Bash Fundamentals</h3>
+              <p class="text-secondary flex-grow-1">Core Bash concepts: shells, commands, paths.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=1">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=1">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=1">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Shell</h3>
+              <p class="text-secondary flex-grow-1">What is a shell? Interactive vs non‑interactive.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=2">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=2">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=2">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Bash shell</h3>
+              <p class="text-secondary flex-grow-1">Why Bash? Features and where it’s used.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=3">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=3">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=3">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">CLI and GUI</h3>
+              <p class="text-secondary flex-grow-1">Command line vs graphical interfaces — when to use each.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=4">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=4">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=4">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Job Automation</h3>
+              <p class="text-secondary flex-grow-1">Automate tasks with cron and friends.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=5">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=5">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=5">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Navigating the Linux file system</h3>
+              <p class="text-secondary flex-grow-1">pwd, ls, cd — absolute vs relative paths.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=6">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=6">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=6">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Basic bash scripting</h3>
+              <p class="text-secondary flex-grow-1">Shebang, execute, permissions, structure.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=7">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=7">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=7">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Shell script</h3>
+              <p class="text-secondary flex-grow-1">Script anatomy, args, exits, best practices.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=8">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=8">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=8">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Declaring and using variables</h3>
+              <p class="text-secondary flex-grow-1">Env vs shell vars, export, quoting.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=9">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=9">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=9">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Basic logic</h3>
+              <p class="text-secondary flex-grow-1">Tests, if/else, loops, case.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=10">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=10">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=10">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Writing scripts executable</h3>
+              <p class="text-secondary flex-grow-1">chmod +x, PATH, ./script.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=11">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=11">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=11">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card bg-dark border-secondary h-100 shadow-sm">
+            <div class="card-body d-flex flex-column">
+              <span class="badge mb-2">Basics</span>
+              <h3 class="h5 mb-2">Automating File or Log Creation</h3>
+              <p class="text-secondary flex-grow-1">touch, >>, date in filenames.</p>
+              <div class="d-flex gap-2">
+                <a class="btn btn-outline-info btn-sm" href="lesson.html?id=12">Open Lesson</a>
+                <a class="btn btn-outline-light btn-sm" href="games.html?id=12">Play Game</a>
+                <a class="btn btn-info btn-sm" href="quiz.html?id=12">Take Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-5 py-5 bg-black border-top border-secondary">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary">
+      <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+        <img src="assets/logo-light.png" alt="" height="20">
+        <strong class="text-light">BashCamp</strong>
+        <span class="ms-2">Learn Bash from basics to extreme — with play.</span>
+      </div>
+      <div class="text-md-end">
+        <a href="about.html" class="link-secondary me-3">Team</a>
+        <a href="resources.html" class="link-secondary me-3">Resources</a>
+        <span>© 2025 BashCamp</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
