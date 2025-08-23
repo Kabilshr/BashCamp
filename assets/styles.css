@@ -468,3 +468,31 @@ a:hover { color: #cfe8ff; }
   color: #000 !important;
 }
 
+/* Dark theme form controls */
+input.form-control,
+textarea.form-control,
+select.form-control,
+.form-control {
+  background-color: #212529;
+  /* Bootstrap dark bg */
+  color: #f8f9fa;
+  /* Light text */
+  border: 1px solid #495057;
+  /* Subtle border */
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  background-color: #212529;
+  color: #f8f9fa;
+  border-color: #0dcaf0;
+  /* Info accent on focus */
+  box-shadow: none;
+  /* Remove default glow */
+}
+
+.black-bg {
+  background-color: #212529 !important;
+  border: 1px solid #495057;
+}
