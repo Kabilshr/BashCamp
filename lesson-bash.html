@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What is Bash — BashCamp</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Monospace fonts (same as other pages) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Site theme -->
+  <link href="assets/styles.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+  <!-- Navbar (consistent with site) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html"><img src="/assets/logo-dark.png" alt="logo" style="width: 40px;""> BashCamp</a>      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="learn.html">Learn</a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex gap-2">
+          <a class="btn btn-outline-light btn-sm" href="learn.html">← Back to Lessons</a>
+          <a class="btn btn-info btn-sm" href="quiz.html?id=13">Take Quiz</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+
+    <!-- Hero -->
+    <section class="hero panel p-4 p-md-5 mb-4">
+      <h1 class="display-6 fw-bold mb-2">What is Bash?</h1>
+      <p class="text-secondary mb-3">
+        A quick primer on the Bash shell — what it is, why it’s used everywhere, and how it powers your command line and automation.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-info btn-lg" href="#start">Start Reading</a>
+        <a class="btn btn-outline-light btn-lg" href="quiz.html?id=13">Take Quiz</a>
+      </div>
+    </section>
+
+    <!-- At‑a‑glance -->
+    <section class="panel p-4 p-md-5 mb-4">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <h2 id="start" class="h3 mb-3">Bash in one minute</h2>
+          <ul class="mb-0">
+            <li><strong>Bash</strong> = <em>Bourne Again SHell</em> — a command interpreter (shell) and scripting language.</li>
+            <li>Default shell on most Linux distros and available on macOS & Windows (via WSL, Git Bash, MSYS2).</li>
+            <li>Great for: running commands, chaining tools with pipes, and automating routine tasks with scripts.</li>
+            <li>You use it in a <strong>terminal</strong>: type a command, press <kbd>Enter</kbd>, see output.</li>
+          </ul>
+        </div>
+        <div class="col-lg-5">
+          <pre class="mb-0"><code># where am I?
+$ <strong>pwd</strong>
+/home/user/projects
+
+# what’s here?
+$ <strong>ls -la</strong>
+
+# run a command and save output
+$ <strong>date &gt;&gt; logs/run.log</strong></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sections -->
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">Why do developers use Bash?</h2>
+      <p class="text-secondary">
+        Bash is lightweight, ubiquitous, and works hand‑in‑hand with the Unix philosophy:
+        combine small tools (<code>grep</code>, <code>sed</code>, <code>awk</code>, <code>sort</code>, <code>wc</code>) to solve bigger problems.
+        It’s ideal for development workflows, servers, CI/CD, and quick data wrangling.
+      </p>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card bg-dark border-secondary h-100">
+            <div class="card-body">
+              <h3 class="h6">Strengths</h3>
+              <ul class="mb-0">
+                <li>Everywhere: Linux, macOS, WSL</li>
+                <li>Fast for ad‑hoc tasks & automation</li>
+                <li>Powerful piping & redirection</li>
+                <li>Works with any CLI tool</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-dark border-secondary h-100">
+            <div class="card-body">
+              <h3 class="h6">Considerations</h3>
+              <ul class="mb-0">
+                <li>Not ideal for large apps</li>
+                <li>Quoting/escaping can be tricky</li>
+                <li>Portability requires care</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">Starting Bash</h2>
+      <p class="text-secondary">
+        Open a terminal and you’re likely already in Bash. If not, you can start it explicitly:
+      </p>
+      <pre><code>$ <strong>bash</strong></code></pre>
+      <p class="text-secondary mb-0">
+        The prompt (often ending with <code>$</code>) is where you type commands. Use <kbd>Ctrl</kbd>+<kbd>C</kbd> to cancel a running command,
+        <kbd>↑</kbd>/<kbd>↓</kbd> to browse history, and <kbd>Tab</kbd> for auto‑completion.
+      </p>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">First commands</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <pre><code># current directory
+$ <strong>pwd</strong>
+
+# list files (long, all)
+$ <strong>ls -la</strong>
+
+# change directory
+$ <strong>cd /etc</strong>
+$ <strong>cd -</strong>   # back</code></pre>
+        </div>
+        <div class="col-lg-6">
+          <pre><code># make a folder and file
+$ <strong>mkdir demo</strong>
+$ <strong>echo "hello" &gt; demo/hello.txt</strong>
+
+# view file
+$ <strong>cat demo/hello.txt</strong></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">Pipes &amp; redirection</h2>
+      <p class="text-secondary">
+        Use a <strong>pipe</strong> (<code>|</code>) to send the output of one command to another. Redirect with <code>&gt;</code> (write) or <code>&gt;&gt;</code> (append).
+      </p>
+      <pre><code># count 404 lines in access.log
+$ <strong>cat access.log | grep 404 | wc -l</strong>
+
+# append the current date to a file
+$ <strong>date &gt;&gt; logs/run.log</strong></code></pre>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">Variables &amp; quoting</h2>
+      <p class="text-secondary">Bash variables are simple key=value pairs (no spaces):</p>
+      <pre><code>$ <strong>NAME="Bash"</strong>
+$ <strong>echo "Hello, $NAME"</strong>
+Hello, Bash</code></pre>
+      <ul class="mb-0">
+        <li><code>"double quotes"</code> expand variables; <code>'single quotes'</code> do not.</li>
+        <li>Export a variable to make it available to child processes: <code>export NAME</code>.</li>
+      </ul>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">Writing your first script</h2>
+      <p class="text-secondary">
+        A Bash script is a text file with commands. Start with a <strong>shebang</strong> to tell the system how to run it:
+      </p>
+      <pre><code>$ <strong>nano hello.sh</strong></code></pre>
+      <pre><code>#!/usr/bin/env bash
+echo "Hello from a script!"</code></pre>
+      <pre class="mb-0"><code># make it executable and run
+$ <strong>chmod +x hello.sh</strong>
+$ <strong>./hello.sh</strong></code></pre>
+    </section>
+
+    <section class="panel p-4 p-md-5 mb-4">
+      <h2 class="h3 mb-3">When to use Bash vs GUI</h2>
+      <ul>
+        <li>Use <strong>Bash</strong> for repeatable tasks, quick data processing, server admin, CI jobs, and glue code.</li>
+        <li>Use a <strong>GUI</strong> for visual work (design, spreadsheets) or when discoverability matters.</li>
+      </ul>
+      <div class="alert mt-3">
+        Tip: if you repeat something more than twice, consider making a small Bash script.
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="panel p-4 p-md-5 mb-4">
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-info btn-lg" href="quiz.html?id=13">Take Quiz</a>
+        <a class="btn btn-outline-light btn-lg" href="learn.html">Back to Lessons</a>
+        <a class="btn btn-outline-light btn-lg" href="resources.html">Bash Reference</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-5 py-5 bg-black border-top border-secondary">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary">
+      <div class="d-flex align-items-center gap-2 mb-2 mb-md-0">
+        <img src="assets/logo-light.png" alt="" height="20">
+        <strong class="text-light">BashCamp</strong>
+        <span class="ms-2">Learn Bash from basics to extreme — with play.</span>
+      </div>
+      <div class="text-md-end">
+        <a href="about.html" class="link-secondary me-3">Team</a>
+        <a href="resources.html" class="link-secondary me-3">Resources</a>
+        <span>© 2025 BashCamp</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

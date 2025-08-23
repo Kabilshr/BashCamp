@@ -1,0 +1,498 @@
+
+/* --- BashCamp Monospace Theme --- */
+:root{
+  --bc-accent: #0dcaf0;
+  --bc-muted: #9ca3af;
+  --bc-bg: #0b0d10;
+  --bc-panel: #121417;
+  --bc-border: #2a2f36;
+}
+
+html, body {
+  background-color: var(--bc-bg);
+  color: #e5e7eb;
+  font-family: "Fira Code", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Source Code Pro", monospace;
+  letter-spacing: 0.1px;
+}
+
+.bg-black { background-color: #0a0c0f !important; }
+.border-secondary { border-color: var(--bc-border) !important; }
+.text-secondary { color: var(--bc-muted) !important; }
+
+/* Hero & gradient utilities */
+.hero-gradient {
+  background: radial-gradient(800px 400px at 10% 10%, rgba(13,202,240,.12), transparent 60%),
+              radial-gradient(800px 400px at 90% 0%, rgba(255,255,255,.06), transparent 60%);
+}
+
+/* Cards & panels */
+.card.bg-dark, .panel {
+  background-color: var(--bc-panel) !important;
+  border-color: var(--bc-border) !important;
+  box-shadow: 0 6px 30px rgba(0,0,0,.25);
+  border-radius: 1rem;
+}
+
+/* Code blocks */
+code, kbd, pre {
+  font-family: inherit;
+}
+pre, .terminal {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+}
+
+/* Buttons */
+.btn-info, .btn-outline-info {
+  --bs-btn-color: #051318;
+  --bs-btn-bg: var(--bc-accent);
+  --bs-btn-border-color: var(--bc-accent);
+  --bs-btn-hover-bg: #0bb0d6;
+  --bs-btn-hover-border-color: #0bb0d6;
+  --bs-btn-active-bg: #08a0c1;
+  --bs-btn-active-border-color: #08a0c1;
+}
+.btn-outline-light {
+  --bs-btn-color: #e5e7eb;
+  --bs-btn-border-color: #e5e7eb;
+  --bs-btn-hover-bg: #e5e7eb;
+  --bs-btn-hover-color: #0a0c0f;
+}
+
+/* Nav tweaks */
+.navbar-brand { letter-spacing: .2px; }
+.nav-link { opacity: .9; }
+.nav-link.active, .nav-link:hover { color: var(--bc-accent) !important; opacity: 1; }
+
+/* Lists and badges */
+.badge {
+  font-weight: 600;
+  background-color: rgba(13,202,240,.15);
+  color: var(--bc-accent);
+  border: 1px solid rgba(13,202,240,.35);
+}
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Home hero */
+.hero-title { font-weight: 700; font-size: clamp(2rem, 5vw, 3.25rem); }
+.hero-sub { color: var(--bc-muted); max-width: 60ch; }
+.stats { gap: 1.25rem; color: var(--bc-muted); }
+
+/* Terminal prompt style (for games) */
+.prompt { color: #9cdcfe; }
+.output-ok { color: #a7f3d0; }
+.output-err { color: #fca5a5; }
+
+
+/* --- Existing Project Styles --- */
+/* =========================================
+   BashCamp — Pro Theme (full CSS)
+   Works across all pages
+========================================= */
+
+/* Optional: nicer font (falls back to system if blocked) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+/* ---------- Theme Tokens (Dark by default, Light via [data-theme="light"]) ---------- */
+:root{
+  --bg: #080f1f;
+  --bg-grad:
+    radial-gradient(900px 500px at 10% -10%, #17223f 0 55%, transparent 56%),
+    radial-gradient(700px 380px at 92% 8%, #0f1b36 0 50%, transparent 51%),
+    linear-gradient(#080f1f,#080f1f);
+  --panel: #0f1a33;
+  --panel-2:#0b1428;
+  --border:#25385f;
+
+  --text:#eaf1ff;
+  --muted:#aeb8d4;
+
+  --accent:#66e3a4;    /* teal */
+  --accent-2:#7aa2ff;  /* blue */
+  --accent-3:#a37bff;  /* violet */
+
+  --ok:#40c057; --warn:#ffb84d; --danger:#ff6b6b;
+
+  --radius: 16px;
+  --shadow-1: 0 10px 28px rgba(6,10,22,.45);
+  --shadow-2: 0 2px 10px rgba(6,10,22,.25);
+  --ring: 0 0 0 3px rgba(122,162,255,.35);
+}
+
+/* Light theme variables (enabled by <html data-theme="light">) */
+:root[data-theme="light"]{
+  --bg:#f7f9ff; --bg-grad: linear-gradient(180deg,#f7f9ff,#eef2ff);
+  --panel:#ffffff; --panel-2:#f4f6ff; --border:#ccd6f6;
+  --text:#0f172a; --muted:#475569;
+  --accent:#2f7bf6; --accent-2:#2f7bf6; --accent-3:#7a5cff;
+  --shadow-1:0 10px 25px rgba(15,23,42,.12);
+  --shadow-2:0 2px 10px rgba(15,23,42,.08);
+  --ring:0 0 0 3px rgba(47,123,246,.30);
+}
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+html,body{
+  margin:0; padding:0;
+  background:var(--bg); background-image:var(--bg-grad);
+  color:var(--text);
+  /* font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;  */
+  font-family: 'Courier New', Courier, monospace;
+  line-height:1.6;
+}
+::selection{background:rgba(122,162,255,.25)}
+:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
+.container{max-width:1120px;margin:0 auto;padding:24px}
+a{color:var(--accent-2);text-decoration:none}
+a:hover{text-decoration:underline}
+h1{font-size:42px;line-height:1.15;margin:10px 0}
+h2{font-size:28px;margin:12px 0}
+h3{font-size:20px;margin:8px 0}
+p{margin:8px 0 12px}
+.small{font-size:13px;color:var(--muted)}
+hr{border:0;border-top:1px solid rgba(122,162,255,.2);margin:12px 0}
+.kbd{display:inline-block;min-width:1.4em;padding:.1em .45em;border-radius:8px;border:1px solid rgba(122,162,255,.35);background:rgba(122,162,255,.08)}
+
+/* Quick utilities */
+.flex{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+/* ---------- Header / Navbar ---------- */
+.nav{
+  position:sticky;top:0;z-index:30;
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg, rgba(14,20,38,.75), rgba(14,20,38,.35));
+  border-bottom:1px solid rgba(122,162,255,.2);
+  box-shadow: var(--shadow-2);
+}
+:root[data-theme="light"] .nav{
+  background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.55));
+  border-bottom:1px solid var(--border);
+}
+.nav .container{display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}
+.brand img{width:28px;height:28px;filter:drop-shadow(0 2px 4px rgba(0,0,0,.25))}
+.nav-link{padding:10px 12px;border-radius:10px;color:var(--text);transition:.18s}
+.nav-link:hover{background:rgba(122,162,255,.10)}
+.nav-link.active{background:rgba(122,162,255,.18);border:1px solid rgba(122,162,255,.25)}
+.badge{
+  margin-left:auto;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:800;
+  background:linear-gradient(180deg,rgba(122,162,255,.16),rgba(122,162,255,.06));
+  border:1px solid rgba(122,162,255,.35);color:var(--accent-2);
+}
+
+/* Theme selector (injected by JS) */
+.theme-select{
+  appearance:none;background:linear-gradient(180deg,rgba(122,162,255,.12),rgba(122,162,255,.06));
+  border:1px solid rgba(122,162,255,.28);color:var(--text);padding:8px 12px;border-radius:10px;font-weight:700;margin-left:6px;
+  transition:transform .12s, background .12s, border-color .12s;
+}
+.theme-select:hover{transform:translateY(-1px);background:rgba(122,162,255,.16)}
+.theme-select:focus{outline:none;box-shadow:var(--ring);border-color:var(--accent-2)}
+
+/* ---------- Cards & Grids ---------- */
+.grid{display:grid;gap:16px}
+.cards{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.00)),
+    var(--panel);
+  border:1px solid rgba(122,162,255,.2);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow: var(--shadow-1);
+  transition: transform .18s, box-shadow .18s, border-color .18s, background .18s;
+}
+.card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(122,162,255,.35);
+  box-shadow:0 16px 36px rgba(6,10,22,.55);
+}
+
+/* Hero block */
+.hero{
+  display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center;
+}
+.hero .card{
+  background:
+    radial-gradient(300px 180px at 85% 20%, rgba(163,123,255,.18), transparent 60%),
+    radial-gradient(260px 160px at 20% 80%, rgba(102,227,164,.15), transparent 60%),
+    var(--panel);
+}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-block;border:none;cursor:pointer;font-weight:800;
+  padding:10px 16px;border-radius:12px;color:#0b1020;
+  background:linear-gradient(180deg,#8bb2ff,#6b92ff);
+  box-shadow:0 8px 22px rgba(122,162,255,.38);
+  transition: transform .14s, filter .14s;
+}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.btn:active{transform:translateY(0);filter:brightness(.98)}
+.btn.secondary{
+  color:var(--text);background:transparent;border:1px solid rgba(122,162,255,.3);box-shadow:none
+}
+
+/* ---------- Progress ---------- */
+.progress{
+  height:12px;background:#0b1428;border:1px solid rgba(122,162,255,.25);
+  border-radius:999px;overflow:hidden
+}
+:root[data-theme="light"] .progress{background:#eef2ff;border-color:#ccd6f6}
+.progress>span{
+  display:block;height:100%;width:0%;
+  background-image:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3));
+  background-size:200% 100%;animation:barScroll 2.4s linear infinite;
+}
+@keyframes barScroll{from{background-position:0 0}to{background-position:200% 0}}
+
+/* ---------- Code Blocks ---------- */
+code,pre{
+  font-family:ui-monospace, Menlo, Consolas, monospace;
+  background:#0b1428;border:1px solid rgba(122,162,255,.28);
+  border-radius:12px;padding:10px;color:#e5edff
+}
+pre{overflow:auto} code{display:inline-block;padding:3px 6px}
+:root[data-theme="light"] code,
+:root[data-theme="light"] pre{
+  background:#f4f6ff;border-color:#ccd6f6;color:#0f172a;
+}
+
+/* ---------- Alerts ---------- */
+.alert{
+  background:linear-gradient(180deg,rgba(122,162,255,.12),rgba(122,162,255,.06));
+  border:1px solid rgba(122,162,255,.35);
+  padding:10px 12px;border-radius:12px;
+}
+
+/* ---------- Quiz ---------- */
+.quiz{
+  background:var(--panel);border:1px solid rgba(122,162,255,.25);
+  border-radius:var(--radius);padding:16px;margin:18px 0;box-shadow:var(--shadow-2)
+}
+.option{
+  padding:10px 12px;border:1px solid rgba(122,162,255,.25);border-radius:12px;margin:8px 0;
+  cursor:pointer;background:rgba(122,162,255,.06);
+  transition:background .14s,border-color .14s,transform .08s
+}
+.option:hover{background:rgba(122,162,255,.12)}
+.option:active{transform:scale(.995)}
+.option.correct{border-color:rgba(64,192,87,.85);background:linear-gradient(180deg,rgba(64,192,87,.18),rgba(64,192,87,.08))}
+.option.wrong{border-color:rgba(255,107,107,.85);background:linear-gradient(180deg,rgba(255,107,107,.18),rgba(255,107,107,.08))}
+
+/* ---------- Forms ---------- */
+label{display:block;margin:12px 0 6px;color:var(--muted)}
+.input,select,textarea{
+  width:100%;color:var(--text);background:#0b1428;border:1px solid rgba(122,162,255,.28);
+  border-radius:12px;padding:10px 12px;transition:box-shadow .12s,border-color .12s
+}
+.input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent-2);box-shadow:var(--ring)}
+:root[data-theme="light"] .input,
+:root[data-theme="light"] select,
+:root[data-theme="light"] textarea{
+  background:#fff;border-color:#ccd6f6;color:#0f172a;
+}
+
+/* ---------- Tables ---------- */
+.table{width:100%;border-collapse:collapse;border-radius:12px;overflow:hidden}
+.table th,.table td{border:1px solid rgba(122,162,255,.22);padding:10px;text-align:left}
+.table th{background:linear-gradient(180deg,rgba(122,162,255,.12),rgba(122,162,255,.08));color:#dfe8ff}
+:root[data-theme="light"] .table th{color:#0f172a}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  margin-top:40px;border-top:1px solid rgba(122,162,255,.2);
+  background:linear-gradient(180deg,rgba(15,23,42,.55),rgba(15,23,42,.35))
+}
+:root[data-theme="light"] .site-footer{
+  background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,.6));
+  border-top:1px solid var(--border);
+}
+.footer-grid{display:grid;gap:16px;grid-template-columns:2fr 1fr 1fr}
+.footer-links{list-style:none;margin:0;padding:0}
+.footer-links li{margin:6px 0}
+.footer-links a{color:var(--text)}
+.footer-bottom{padding:12px 24px;border-top:1px solid rgba(122,162,255,.15);text-align:center;color:var(--muted)}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+  h1{font-size:34px}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important; transition:none !important}
+}
+
+/* === Button visibility fix (stronger contrast) === */
+.btn{
+  color:#fff !important;
+  background:linear-gradient(180deg,#69a9ff,#3c7dff) !important;
+  border:1px solid rgba(122,162,255,.45) !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.25);
+}
+.btn:hover{ filter:brightness(1.08); transform:translateY(-1px); }
+.btn:active{ transform:translateY(0); }
+.btn:disabled{ opacity:.6; cursor:not-allowed; }
+.btn.secondary{
+  background:rgba(122,162,255,.10) !important;
+  border:1.5px solid rgba(122,162,255,.55) !important;
+  color:#eaf1ff !important;
+}
+.btn.secondary:hover{ background:rgba(122,162,255,.16) !important; }
+:root[data-theme="light"] .btn{
+  color:#fff !important;
+  background:linear-gradient(180deg,#4b8dff,#2f7bf6) !important;
+  border-color:rgba(47,123,246,.55) !important;
+}
+:root[data-theme="light"] .btn.secondary{
+  color:#0f172a !important;
+  background:rgba(47,123,246,.10) !important;
+  border-color:rgba(47,123,246,.55) !important;
+}
+
+
+
+/* === Visibility & Spacing Fixes === */
+.text-secondary, .text-muted {
+  color: #e2e8f0 !important;  /* lighter gray */
+}
+
+html, body {
+  color: #f8fafc;  /* default text brighter */
+}
+
+section {
+  margin-bottom: 2rem;   /* space between sections */
+}
+
+.card {
+  margin-bottom: 1.5rem; /* vertical spacing between cards */
+  padding: 1rem;         /* internal spacing */
+}
+
+
+/* === Visibility & Spacing Patch (BashCamp) === */
+
+/* Make muted text readable on dark background */
+:root{
+  --bc-muted: #cbd5e1; /* lighter slate */
+}
+
+/* Global text brighter */
+html, body {
+  color: #f8fafc; /* near-white */
+}
+
+/* Boost secondary/muted classes commonly used in content */
+.text-secondary, .text-muted {
+  color: #e2e8f0 !important; /* light slate */
+}
+
+/* Extra breathing room between sections and cards */
+section { margin-bottom: 2rem; }
+.card { margin-bottom: 1.5rem; padding: 1rem; }
+
+/* Slightly brighter hero subtitle */
+.hero-sub { color: #e5e7eb !important; }
+
+
+/* === Force Readability Override === */
+.hero-gradient *, .panel *, .card *, main *, section * {
+  color: #e9f1ff !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+/* Ensure paragraphs and list items are bright enough */
+p, li { color: #e6edf7 !important; }
+
+/* Dark surfaces keep contrast */
+.bg-dark, .bg-black { color: #e9f1ff !important; }
+
+/* Links remain visible */
+a { color: #9bd2ff; }
+a:hover { color: #cfe8ff; }
+
+
+/* === W3Schools-like Home Sections === */
+.bc-slab {
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+}
+.bc-slab .display-5 { letter-spacing: .3px; }
+.example-card {
+  background: #ffffff;
+  border-radius: .75rem;
+  border: 1px solid rgba(0,0,0,.08);
+  overflow: hidden;
+}
+.example-card pre {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  background: #ffffff;
+  color: #111827;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", mono;
+}
+
+/* Soft pastel backgrounds for contrast with dark chrome */
+.slab-green { background: #dff3e4; }
+.slab-yellow{ background: #fff1b8; }
+.slab-pink  { background: #ffd9e0; }
+.slab-blue  { background: #dcecff; }
+
+@media (prefers-color-scheme: dark) {
+  .example-card { background:#0f172a; border-color:#334155; }
+  .example-card pre { background:#0f172a; color:#e2e8f0; }
+} 
+/* Force slab blurbs/descriptions to be black */
+.bc-slab .lead {
+  color: #111 !important;  /* pure black */
+}
+
+/* Also catch any <p> directly under slab headings */
+.bc-slab p {
+  color: #111 !important;
+}
+/* ✅ Force feature section titles to be black */
+.bc-slab h2,
+.bc-slab h3,
+.bc-slab .display-5,
+.bc-slab .fw-bold {
+  color: #000 !important;
+}
+
+/* Dark theme form controls */
+input.form-control,
+textarea.form-control,
+select.form-control,
+.form-control {
+  background-color: #212529;
+  /* Bootstrap dark bg */
+  color: #f8f9fa;
+  /* Light text */
+  border: 1px solid #495057;
+  /* Subtle border */
+}
+
+input.form-control:focus,
+textarea.form-control:focus,
+select.form-control:focus {
+  background-color: #212529;
+  color: #f8f9fa;
+  border-color: #0dcaf0;
+  /* Info accent on focus */
+  box-shadow: none;
+  /* Remove default glow */
+}
+
+.black-bg {
+  background-color: #212529 !important;
+  border: 1px solid #495057;
+}
